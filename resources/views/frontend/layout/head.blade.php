@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GeoTrip - Tour & Travel Booking Agency HTML Template | ThemezHub</title>
+    <title>@yield('title', 'GeoTrip - A Complete Hotel & Flight Booking System HTML Template | ThemezHub')</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('asset')}}s/img/favicon.png">
 
     <!-- All Plugins -->
