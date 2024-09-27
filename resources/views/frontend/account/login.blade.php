@@ -1,5 +1,5 @@
 @extends('frontend.layout.main')
-
+@section('title', 'login')
 @section('main-section')
 <div id="main-wrapper">
 
@@ -19,6 +19,11 @@
                             <!-- Divider -->
                             <div class="vr opacity-1 d-none d-lg-block"></div>
                         </div>
+                        @if (@session()->has('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
 
                         <!-- Information -->
                         <div class="col-lg-6 order-1">
@@ -29,26 +34,49 @@
                                 </a>
                                 <!-- Title -->
                                 <h1 class="mb-2 fs-2">Welcome Back Adam!</h1>
-                                <p class="mb-0">Are you new here?<a href="register.html" class="fw-medium text-primary"> Create an
+                                <p class="mb-0">Are you new here?<a href="registration" class="fw-medium text-primary"> Create an
                                         account</a></p>
 
                                 <!-- Form START -->
-                                <form class="mt-4 text-start">
+                                <form class="mt-4 text-start" action="{{ route('login.post') }}" method="post">
+                                @csrf
                                     <div class="form py-4">
                                         <div class="form-floating mb-4">
-                                            <input type="email" class="form-control" placeholder="name@example.com" required="">
-                                            <label>User Name</label>
+                                            <input type="email" name="email" class="form-control" placeholder="name@example.com" autofocus required>
+                                            <label>User Email</label>
+                                           @if ($errors->has('email'))
+                                            <span class="text-denger">
+                                                {{ $errors->first('email') }}
+                                            </span>
+                                           @endif
                                         </div>
                                         <div class="form-floating mb-4">
-                                            <input type="password" class="form-control" id="password-field" name="password" placeholder="Password"  required="">
+                                            <input type="password" class="form-control" id="password-field" name="password" placeholder="Password" >
                                             <label>Password</label>
                                             <span
                                                 class="toggle-password position-absolute top-50 end-0 translate-middle-y me-3 fa-regular fa-eye"></span>
+                                                @if ($errors->has('Password'))
+                                            <span class="text-denger">
+                                                {{ $errors->first('Password') }}
+                                            </span>
+                                           @endif
                                         </div>
 
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary full-width font--bold btn-lg">Log In</button>
                                         </div>
+
+                                        <!-- Flash Messages -->
+                                            @if (session('error'))
+                                                <div class="alert alert-danger">
+                                                    {{ session('error') }}
+                                                </div>
+                                            @endif
+                                            @if (session('success'))
+                                                <div class="alert alert-success">
+                                                    {{ session('success') }}
+                                                </div>
+                                            @endif
 
                                         <div class="modal-flex-item d-flex align-items-center justify-content-between mb-3">
                                             <div class="modal-flex-first">
